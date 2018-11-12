@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1.1.0" author="Dmitry Danilov">
+
+        <createTable tableName="certificateTypes">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="certificateTypes_pk"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="workingTypes">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="workingTypes_pk"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="organizations">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="organizations_pk"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="specializations">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="specializations_pk"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="files">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="files_pk"/>
+            </column>
+            <column name="path" type="varchar(265)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="serviceTypes">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="serviceTypes_pk"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="workingTypeId" type="bigint">
+                <constraints
+                        nullable="false"
+                        foreignKeyName="serviceTypes_workingTypes_fk"
+                        referencedTableName="workingTypes"
+                        referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="functions">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="functions_pk"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="specializationId" type="bigint">
+                <constraints
+                        nullable="false"
+                        foreignKeyName="functions_specializations_fk"
+                        referencedTableName="specializations"
+                        referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="users">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="users_pk"/>
+            </column>
+            <column name="login" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="roles">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="roles_pk"/>
+            </column>
+            <column name="name" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="users_roles">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="users_roles_users_id_fk"
+                             referencedTableName="users"
+                             referencedColumnNames="id"
+                             deleteCascade="true"
+                />
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="users_roles_roles_id_fk"
+                             referencedTableName="roles"
+                             referencedColumnNames="id"
+                             deleteCascade="true"
+                />
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="users_roles" columnNames="user_id,role_id"/>
+
+    </changeSet>
+
+    <changeSet id="1.1.1" author="Dmitry Danilov">
+
+        <insert tableName="roles">
+            <column name="name" value="super_admin"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="name" value="admin"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="name" value="user"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="login" value="ivc"/>
+            <column name="password" value="8d2cc35e70deca8505ee61f089a46ec4"/> <!-- password: oks-->
+            <column name="name" value="ivc administrator"/>
+        </insert>
+
+        <insert tableName="users_roles">
+            <column name="user_id" valueComputed="(select id from users where login = 'ivc' limit 1)"/>
+            <column name="role_id" valueComputed="(select id from roles where name = 'super_admin' limit 1)"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

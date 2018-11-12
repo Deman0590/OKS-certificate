@@ -34,7 +34,7 @@ public class ApplicationConfiguration {
     @Bean
     public SpringLiquibase liquibase(){
         SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setChangeLog("classpath:liquibase-changeLog.xml");
+        liquibase.setChangeLog("classpath:liquibase-changelog.xml");
         liquibase.setDataSource(dataSource());
         return liquibase;
     }
