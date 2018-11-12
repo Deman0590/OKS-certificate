@@ -6,18 +6,18 @@
 
     <changeSet id="1.1.0" author="Dmitry Danilov">
 
-        <createTable tableName="certificateTypes">
+        <createTable tableName="certificate_types">
             <column name="id" autoIncrement="true" type="bigint">
-                <constraints primaryKey="true" nullable="false" primaryKeyName="certificateTypes_pk"/>
+                <constraints primaryKey="true" nullable="false" primaryKeyName="certificate_types_pk"/>
             </column>
             <column name="name" type="varchar(256)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <createTable tableName="workingTypes">
+        <createTable tableName="working_types">
             <column name="id" autoIncrement="true" type="bigint">
-                <constraints primaryKey="true" nullable="false" primaryKeyName="workingTypes_pk"/>
+                <constraints primaryKey="true" nullable="false" primaryKeyName="working_types_pk"/>
             </column>
             <column name="name" type="varchar(256)">
                 <constraints nullable="false"/>
@@ -51,18 +51,18 @@
             </column>
         </createTable>
 
-        <createTable tableName="serviceTypes">
+        <createTable tableName="service_types">
             <column name="id" autoIncrement="true" type="bigint">
-                <constraints primaryKey="true" nullable="false" primaryKeyName="serviceTypes_pk"/>
+                <constraints primaryKey="true" nullable="false" primaryKeyName="service_types_pk"/>
             </column>
             <column name="name" type="varchar(256)">
                 <constraints nullable="false"/>
             </column>
-            <column name="workingTypeId" type="bigint">
+            <column name="working_typeId" type="bigint">
                 <constraints
                         nullable="false"
-                        foreignKeyName="serviceTypes_workingTypes_fk"
-                        referencedTableName="workingTypes"
+                        foreignKeyName="service_types_workingTypes_fk"
+                        referencedTableName="working_types"
                         referencedColumnNames="id"/>
             </column>
         </createTable>

@@ -2,7 +2,7 @@ package by.ivc.okssertificate.data.entity;
 
 public class CertificateType {
 
-    private long id;
+    private Long id;
     private String name;
 
     public CertificateType() {
@@ -13,7 +13,7 @@ public class CertificateType {
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
