@@ -1,22 +1,22 @@
 package by.ivc.okssertificate.data.entity;
 
 public class File {
-    private long id;
+    private Long id;
     private String path;
 
     public File() {
     }
 
-    public File(long id, String path) {
+    public File(Long id, String path) {
         this.id = id;
         this.path = path;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

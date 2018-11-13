@@ -32,6 +32,6 @@
     </select>
 
     <select id="readByName" resultMap="certificateTypeMap" parameterType="string">
-        select c.id as id, c.name as name from certificate_types c where c.name = #{name}
+        select c.id as id, c.name as name from certificate_types c where c.name like '%'||#{name}||'%'
     </select>
 </mapper>

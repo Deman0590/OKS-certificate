@@ -8,7 +8,7 @@ public class CertificateType {
     public CertificateType() {
     }
 
-    public CertificateType(long id, String name) {
+    public CertificateType(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -17,7 +17,15 @@ public class CertificateType {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

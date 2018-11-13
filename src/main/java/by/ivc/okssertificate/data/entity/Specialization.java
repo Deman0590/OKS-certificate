@@ -2,22 +2,22 @@ package by.ivc.okssertificate.data.entity;
 
 public class Specialization {
 
-    private long id;
+    private Long id;
     private String name;
 
     public Specialization() {
     }
 
-    public Specialization(long id, String name) {
+    public Specialization(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

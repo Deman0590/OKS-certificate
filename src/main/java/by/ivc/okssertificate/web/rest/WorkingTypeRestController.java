@@ -1,8 +1,7 @@
 package by.ivc.okssertificate.web.rest;
 
-
-import by.ivc.okssertificate.data.entity.CertificateType;
-import by.ivc.okssertificate.service.CertificateTypeService;
+import by.ivc.okssertificate.data.entity.WorkingType;
+import by.ivc.okssertificate.service.WorkingTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,39 +15,39 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "certificate/type")
-public class CertificateTypeRestController {
+@RequestMapping(value = "/working/type")
+public class WorkingTypeRestController {
 
-    private final CertificateTypeService typeService;
+    private final WorkingTypeService workingTypeService;
 
     @Autowired
-    public CertificateTypeRestController(CertificateTypeService typeService) {
-        this.typeService = typeService;
+    public WorkingTypeRestController(WorkingTypeService workingTypeSerice) {
+        this.workingTypeService = workingTypeSerice;
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity create(@RequestBody CertificateType certificateType){
-        return new ResponseEntity<>(typeService.save(certificateType), HttpStatus.CREATED);
+    public ResponseEntity create(@RequestBody WorkingType workingType) {
+        return new ResponseEntity<>(workingTypeService.save(workingType), HttpStatus.CREATED);
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE )
-    public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id){
-        typeService.delete(id);
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id) {
+        workingTypeService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<CertificateType> findAll(){
-        return typeService.findAll();
+    public List<WorkingType> findAll() {
+        return workingTypeService.findAll();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public CertificateType findById(@PathVariable(name="id") Long id){
-        return typeService.findById(id);
+    public WorkingType findById(@PathVariable(name = "id") Long id) {
+        return workingTypeService.findById(id);
     }
 
     @RequestMapping(path = "name/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<CertificateType> findByName(@PathVariable(name = "name") String name){
-        return typeService.findByName(name);
+    public List<WorkingType> findByName(@PathVariable(name = "name") String name) {
+        return workingTypeService.findByName(name);
     }
 }

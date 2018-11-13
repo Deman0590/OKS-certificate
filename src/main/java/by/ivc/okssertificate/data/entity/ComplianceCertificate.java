@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ComplianceCertificate {
 
-    private long id;
+    private Long id;
     private CertificateType certificateType;
     private WorkingType workingType;
     private Date startDate;
@@ -17,7 +17,7 @@ public class ComplianceCertificate {
     public ComplianceCertificate() {
     }
 
-    public ComplianceCertificate(long id, CertificateType certificateType, WorkingType workingType, Date startDate, Date endDate, List<File> files, List<Organization> organizations, List<WorkingType> workingTypes) {
+    public ComplianceCertificate(Long id, CertificateType certificateType, WorkingType workingType, Date startDate, Date endDate, List<File> files, List<Organization> organizations, List<WorkingType> workingTypes) {
         this.id = id;
         this.certificateType = certificateType;
         this.workingType = workingType;
@@ -28,11 +28,11 @@ public class ComplianceCertificate {
         this.workingTypes = workingTypes;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

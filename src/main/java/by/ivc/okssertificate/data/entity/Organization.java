@@ -2,22 +2,22 @@ package by.ivc.okssertificate.data.entity;
 
 public class Organization {
 
-    private long id;
+    private Long id;
     private String name;
 
     public Organization() {
     }
 
-    public Organization(long id, String name) {
+    public Organization(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

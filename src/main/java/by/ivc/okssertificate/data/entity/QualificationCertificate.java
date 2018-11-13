@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class QualificationCertificate {
-    private long id;
+    private Long id;
     private Organization organization;
     private Specialization specialization;
     private List<Function> functions;
@@ -17,7 +17,7 @@ public class QualificationCertificate {
     public QualificationCertificate() {
     }
 
-    public QualificationCertificate(long id, Organization organization, Specialization specialization, List<Function> functions, String worker, Position position, int number, Date startDate, Date stopDate) {
+    public QualificationCertificate(Long id, Organization organization, Specialization specialization, List<Function> functions, String worker, Position position, int number, Date startDate, Date stopDate) {
         this.id = id;
         this.organization = organization;
         this.specialization = specialization;
@@ -29,11 +29,11 @@ public class QualificationCertificate {
         this.stopDate = stopDate;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

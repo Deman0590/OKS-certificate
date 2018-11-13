@@ -2,24 +2,24 @@ package by.ivc.okssertificate.data.entity;
 
 public class ServiceType {
 
-    private long id;
+    private Long id;
     private String name;
     private WorkingType workingType;
 
     public ServiceType() {
     }
 
-    public ServiceType(long id, String name, WorkingType workingType) {
+    public ServiceType(Long id, String name, WorkingType workingType) {
         this.id = id;
         this.name = name;
         this.workingType = workingType;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

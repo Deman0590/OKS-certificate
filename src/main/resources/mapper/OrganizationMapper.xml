@@ -1,0 +1,38 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="by.ivc.okssertificate.data.mapper.OrganizationMapper">
+
+    <resultMap id="organizationMap" type="Organization">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <insert id="create" parameterType="Organization" useGeneratedKeys="true">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            select nextVal('organizations_id_seq')
+        </selectKey>
+        insert into organizations (id, name) values (#{id}, #{name})
+    </insert>
+
+    <update id="update" parameterType="Organization">
+        update organizations set "name" = #{name} where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from organizations where id = #{id}
+    </delete>
+
+    <select id="readAll" resultMap="organizationMap">
+        select o.id as id, o.name as name from organizations o
+    </select>
+
+    <select id="readById" resultMap="organizationMap" parameterType="long">
+        select o.id as id, o.name as name from organizations o where o.id = #{id}
+    </select>
+
+    <select id="readByName" resultMap="organizationMap" parameterType="string">
+        select o.id as id, o.name as name from organizations o where o.name like '%'||#{name}||'%'
+    </select>
+
+</mapper>

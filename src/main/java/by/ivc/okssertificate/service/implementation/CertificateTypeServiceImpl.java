@@ -1,7 +1,8 @@
-package by.ivc.okssertificate.service;
+package by.ivc.okssertificate.service.implementation;
 
 import by.ivc.okssertificate.data.entity.CertificateType;
 import by.ivc.okssertificate.data.mapper.CertificateTypeMapper;
+import by.ivc.okssertificate.service.CertificateTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,6 @@ public class CertificateTypeServiceImpl implements CertificateTypeService {
             typeMapper.create(certificateType);
         } else {
             typeMapper.update(certificateType);
-            certificateType.getId();
         }
         return certificateType.getId();
     }

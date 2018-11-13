@@ -2,24 +2,24 @@ package by.ivc.okssertificate.data.entity;
 
 public class Function {
 
-    private long id;
+    private Long id;
     private String name;
     private Specialization specialization;
 
     public Function() {
     }
 
-    public Function(long id, String name, Specialization specialization) {
+    public Function(Long id, String name, Specialization specialization) {
         this.id = id;
         this.name = name;
         this.specialization = specialization;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

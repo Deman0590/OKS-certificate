@@ -1,0 +1,37 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="by.ivc.okssertificate.data.mapper.WorkingTypeMapper">
+
+    <resultMap id="workingTypeMap" type="WorkingType">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <insert id="create" parameterType="WorkingType" useGeneratedKeys="true">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            select nextVal('working_types_id_seq')
+        </selectKey>
+        insert into working_types (id, name) values (#{id}, #{name})
+    </insert>
+
+    <update id="update" parameterType="WorkingType">
+        update working_types set "name" = #{name} where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from working_types where id = #{id}
+    </delete>
+
+    <select id="readAll" resultMap="workingTypeMap">
+        select w.id as id, w.name as name from working_types w
+    </select>
+
+    <select id="readById" resultMap="workingTypeMap" parameterType="long">
+        select w.id as id, w.name as name from working_types w where w.id = #{id}
+    </select>
+
+    <select id="readByName" resultMap="workingTypeMap" parameterType="string">
+        select w.id as id, w.name as name from working_types w where w.name like '%'||#{name}||'%'
+    </select>
+</mapper>
