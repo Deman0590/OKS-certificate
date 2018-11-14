@@ -1,0 +1,53 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="by.ivc.okscertificate.data.mapper.ServiceTypeMapper">
+
+    <resultMap id="serviceTypeMap" type="ServiceType">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <association property="workingType" javaType="WorkingType">
+            <id property="id" column="w_id"/>
+            <result property="name" column="w_name"/>
+        </association>
+    </resultMap>
+
+    <insert id="create" parameterType="ServiceType" useGeneratedKeys="true">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            select nextVal('service_types_id_seq')
+        </selectKey>
+        insert into service_types (id, name, working_type_id) values (#{id}, #{name}, #{workingType.id})
+    </insert>
+
+    <update id="update" parameterType="ServiceType">
+        update service_types set name = #{name}, working_type_id = #{workingType.id} where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from service_types where id = #{id}
+    </delete>
+
+    <select id="readAll" resultMap="serviceTypeMap">
+        select s.id as id, s.name as name, w.id as w_id, w.name as w_name
+        from service_types s join working_types w on w.id = s.working_type_id
+    </select>
+
+    <select id="readById" resultMap="serviceTypeMap" parameterType="long">
+        select s.id as id, s.name as name, w.id as w_id, w.name as w_name
+        from service_types s join working_types w on w.id = s.working_type_id
+        where s.id = #{id}
+    </select>
+
+    <select id="readByWorkingTypeId" resultMap="serviceTypeMap" parameterType="long">
+        select s.id as id, s.name as name, w.id as w_id, w.name as w_name
+        from service_types s join working_types w on w.id = s.working_type_id
+        where s.working_type_id = #{id}
+    </select>
+
+    <select id="readByName" resultMap="serviceTypeMap" parameterType="string">
+        select s.id as id, s.name as name, w.id as w_id, w.name as w_name
+        from service_types s join working_types w on w.id = s.working_type_id
+        where s.name like '%'||#{name}||'%'
+    </select>
+
+</mapper>

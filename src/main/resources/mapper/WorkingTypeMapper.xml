@@ -1,7 +1,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="by.ivc.okssertificate.data.mapper.WorkingTypeMapper">
+<mapper namespace="by.ivc.okscertificate.data.mapper.WorkingTypeMapper">
 
     <resultMap id="workingTypeMap" type="WorkingType">
         <id property="id" column="id"/>

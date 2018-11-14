@@ -1,7 +1,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="by.ivc.okssertificate.data.mapper.SpecializationMapper">
+<mapper namespace="by.ivc.okscertificate.data.mapper.SpecializationMapper">
 
     <resultMap id="specializationMap" type="Specialization">
         <id property="id" column="id"/>

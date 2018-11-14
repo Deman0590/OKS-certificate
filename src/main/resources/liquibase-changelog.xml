@@ -58,7 +58,7 @@
             <column name="name" type="varchar(256)">
                 <constraints nullable="false"/>
             </column>
-            <column name="working_typeId" type="bigint">
+            <column name="working_type_id" type="bigint">
                 <constraints
                         nullable="false"
                         foreignKeyName="service_types_workingTypes_fk"
@@ -74,7 +74,7 @@
             <column name="name" type="varchar(256)">
                 <constraints nullable="false"/>
             </column>
-            <column name="specializationId" type="bigint">
+            <column name="specialization_id" type="bigint">
                 <constraints
                         nullable="false"
                         foreignKeyName="functions_specializations_fk"

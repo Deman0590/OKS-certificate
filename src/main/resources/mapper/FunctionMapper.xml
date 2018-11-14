@@ -1,0 +1,53 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="by.ivc.okscertificate.data.mapper.FunctionMapper">
+
+    <resultMap id="functionMap" type="Function">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <association property="specialization" javaType="Specialization">
+            <id property="id" column="s_id"/>
+            <result property="name" column="s_name"/>
+        </association>
+    </resultMap>
+
+    <insert id="create" parameterType="Function" useGeneratedKeys="true">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            select nextVal('functions_id_seq')
+        </selectKey>
+        insert into functions (id, name, specialization_id) values (#{id}, #{name}, #{specialization.id})
+    </insert>
+
+    <update id="update" parameterType="Function">
+        update functions set name = #{name}, specialization_id = #{specialization.id} where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from functions where id = #{id}
+    </delete>
+
+    <select id="readAll" resultMap="functionMap">
+        select f.id as id, f.name as name, s.id as s_id, s.name as s_name
+        from functions f join specializations s on s.id = f.specialization_id
+    </select>
+
+    <select id="readById" resultMap="functionMap" parameterType="long">
+        select f.id as id, f.name as name, s.id as s_id, s.name as s_name
+        from functions f join specializations s on s.id = f.specialization_id
+        where f.id = #{id}
+    </select>
+
+    <select id="readBySpecializationId" resultMap="functionMap" parameterType="long">
+        select f.id as id, f.name as name, s.id as s_id, s.name as s_name
+        from functions f join specializations s on s.id = f.specialization_id
+        where f.specialization_id = #{id}
+    </select>
+
+    <select id="readByName" resultMap="functionMap" parameterType="string">
+        select f.id as id, f.name as name, s.id as s_id, s.name as s_name
+        from functions f join specializations s on s.id = f.specialization_id
+        where f.name like '%'||#{name}||'%'
+    </select>
+
+</mapper>
