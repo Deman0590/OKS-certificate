@@ -7,7 +7,7 @@ public class ComplianceCertificate {
 
     private Long id;
     private CertificateType certificateType;
-    private WorkingType workingType;
+    private ServiceType serviceType;
     private Date startDate;
     private Date endDate;
     private List<File> files;
@@ -17,10 +17,10 @@ public class ComplianceCertificate {
     public ComplianceCertificate() {
     }
 
-    public ComplianceCertificate(Long id, CertificateType certificateType, WorkingType workingType, Date startDate, Date endDate, List<File> files, List<Organization> organizations, List<WorkingType> workingTypes) {
+    public ComplianceCertificate(Long id, CertificateType certificateType, ServiceType serviceType, Date startDate, Date endDate, List<File> files, List<Organization> organizations, List<WorkingType> workingTypes) {
         this.id = id;
         this.certificateType = certificateType;
-        this.workingType = workingType;
+        this.serviceType = serviceType;
         this.startDate = startDate;
         this.endDate = endDate;
         this.files = files;
@@ -44,12 +44,12 @@ public class ComplianceCertificate {
         this.certificateType = certificateType;
     }
 
-    public WorkingType getWorkingType() {
-        return workingType;
+    public ServiceType getServiceType() {
+        return serviceType;
     }
 
-    public void setWorkingType(WorkingType workingType) {
-        this.workingType = workingType;
+    public void setServiceType(ServiceType serviceType) {
+        this.serviceType = serviceType;
     }
 
     public Date getStartDate() {
