@@ -1,0 +1,38 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="by.ivc.okscertificate.data.mapper.PositionMapper">
+
+    <resultMap id="positionMap" type="Position">
+        <id property="id" column="p_id"/>
+        <result property="name" column="p_name"/>
+    </resultMap>
+
+    <insert id="create" parameterType="Position" useGeneratedKeys="true">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            select nextVal('positions_id_seq')
+        </selectKey>
+        insert into positions (id, name) values (#{id}, #{name})
+    </insert>
+
+    <update id="update" parameterType="Position">
+        update positions set "name" = #{name} where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from positions where id = #{id}
+    </delete>
+
+    <select id="readAll" resultMap="positionMap">
+        select p.id as p_id, p.name as p_name from positions p
+    </select>
+
+    <select id="readById" resultMap="positionMap" parameterType="long">
+        select p.id as p_id, p.name as p_name from positions p where p.id = #{id}
+    </select>
+
+    <select id="readByName" resultMap="positionMap" parameterType="string">
+        select p.id as p_id, p.name as p_name from positions p where p.name like '%'||#{name}||'%'
+    </select>
+
+</mapper>

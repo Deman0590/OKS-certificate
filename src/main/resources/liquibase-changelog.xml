@@ -51,6 +51,15 @@
             </column>
         </createTable>
 
+        <createTable tableName="positions">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="positions_pk"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
         <createTable tableName="service_types">
             <column name="id" autoIncrement="true" type="bigint">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="service_types_pk"/>
