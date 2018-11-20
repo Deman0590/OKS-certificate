@@ -63,11 +63,11 @@
         org.id as org_id, org.name as org_name, spec.id as spec_id, spec.name as spec_name, p.id as p_id, p.name as p_name,
         f.id as f_id, f.name as f_name
         from qualification_certificates q
-        join organizations org on org.id = q.organization_id
-        join specializations spec on spec.id = q.specialization_id
-        join positions p on p.id = q.position_id
+        left join organizations org on org.id = q.organization_id
+        left join specializations spec on spec.id = q.specialization_id
+        left join positions p on p.id = q.position_id
         left join qualification_certificates_functions qf on qf.certificate_id = q.id
-        left join functions f on f.id = qf.function_id where q.id = 1
+        left join functions f on f.id = qf.function_id where q.id = #{id}
     </select>
 
     <insert id="addFunction" useGeneratedKeys="true" parameterType="map">

@@ -21,7 +21,7 @@ public class QualificationCertificateServiceImpl implements QualificationCertifi
 
     @Override
     public QualificationCertificate findById(long id) {
-        return null;
+        return mapper.readById(id);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class QualificationCertificateServiceImpl implements QualificationCertifi
 
     @Override
     public void delete(Long id) {
-
+        mapper.delete(id);
     }
 
     @Override
