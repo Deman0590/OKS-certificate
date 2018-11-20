@@ -4,8 +4,8 @@
 <mapper namespace="by.ivc.okscertificate.data.mapper.FunctionMapper">
 
     <resultMap id="functionMap" type="Function">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
+        <id property="id" column="f_id"/>
+        <result property="name" column="f_name"/>
         <association property="specialization" javaType="Specialization">
             <id property="id" column="s_id"/>
             <result property="name" column="s_name"/>
@@ -28,24 +28,24 @@
     </delete>
 
     <select id="readAll" resultMap="functionMap">
-        select f.id as id, f.name as name, s.id as s_id, s.name as s_name
+        select f.id as f_id, f.name as f_name, s.id as s_id, s.name as s_name
         from functions f join specializations s on s.id = f.specialization_id
     </select>
 
     <select id="readById" resultMap="functionMap" parameterType="long">
-        select f.id as id, f.name as name, s.id as s_id, s.name as s_name
+        select f.id as f_id, f.name as f_name, s.id as s_id, s.name as s_name
         from functions f join specializations s on s.id = f.specialization_id
         where f.id = #{id}
     </select>
 
     <select id="readBySpecializationId" resultMap="functionMap" parameterType="long">
-        select f.id as id, f.name as name, s.id as s_id, s.name as s_name
+        select f.id as f_id, f.name as f_name, s.id as s_id, s.name as s_name
         from functions f join specializations s on s.id = f.specialization_id
         where f.specialization_id = #{id}
     </select>
 
     <select id="readByName" resultMap="functionMap" parameterType="string">
-        select f.id as id, f.name as name, s.id as s_id, s.name as s_name
+        select f.id as f_id, f.name as f_name, s.id as s_id, s.name as s_name
         from functions f join specializations s on s.id = f.specialization_id
         where f.name like '%'||#{name}||'%'
     </select>
