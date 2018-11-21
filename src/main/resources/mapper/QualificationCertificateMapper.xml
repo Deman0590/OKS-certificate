@@ -1,0 +1,81 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="by.ivc.okscertificate.data.mapper.QualificationCertificateMapper">
+
+    <resultMap id="qualificationCertificateMap" type="QualificationCertificate">
+        <id property="id" column="id"/>
+        <result property="worker" column="worker"/>
+        <result property="number" column="number"/>
+        <result property="startDate" column="start_date"/>
+        <result property="stopDate" column="end_date"/>
+        <association property="organization" javaType="Organization">
+            <id property="id" column="org_id"/>
+            <result property="name" column="org_name"/>
+        </association>
+        <association property="specialization" javaType="Specialization">
+            <id property="id" column="spec_id"/>
+            <result property="name" column="spec_name"/>
+        </association>
+        <association property="position" javaType="Position">
+            <id property="id" column="p_id"/>
+            <result property="name" column="p_name"/>
+        </association>
+        <collection property="functions" ofType="Function" javaType="list"
+                    resultMap="by.ivc.okscertificate.data.mapper.FunctionMapper.functionMap"/>
+    </resultMap>
+
+    <insert id="create" parameterType="QualificationCertificate" useGeneratedKeys="true">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            select nextVal('qualification_certificates_id_seq')
+        </selectKey>
+        insert into qualification_certificates (id, organization_id, specialization_id,
+        worker, position_id, number, start_date, end_date)
+        values (#{id}, #{organization.id}, #{specialization.id}, #{worker}, #{position.id},
+        #{number}, #{startDate}, #{stopDate})
+    </insert>
+
+    <update id="update" parameterType="QualificationCertificate">
+        update qualification_certificates set organization_id = #{organization.id},
+        specialization_id = #{specialization.id}, worker = #{worker},
+        position_id = #{position.id}, number = #{number}, start_date = #{startDate},
+        end_date = #{stopDate} where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from qualification_certificates where id = #{id}
+    </delete>
+
+    <select id="readAll" resultMap="qualificationCertificateMap">
+        select q.id as id, q.worker as worker, q.number as number, q.start_date as start_date, q.end_date as end_date,
+        org.id as org_id, org.name as org_name, spec.id as spec_id, spec.name as spec_name, p.id as p_id, p.name as p_name,
+        f.id as f_id, f.name as f_name
+        from qualification_certificates q
+        join organizations org on org.id = q.organization_id
+        join specializations spec on spec.id = q.specialization_id
+        join positions p on p.id = q.position_id
+        left join qualification_certificates_functions qf on qf.certificate_id = q.id
+        left join functions f on f.id = qf.function_id
+    </select>
+
+    <select id="readById" resultMap="qualificationCertificateMap" parameterType="long">
+        select q.id as id, q.worker as worker, q.number as number, q.start_date as start_date, q.end_date as end_date,
+        org.id as org_id, org.name as org_name, spec.id as spec_id, spec.name as spec_name, p.id as p_id, p.name as p_name,
+        f.id as f_id, f.name as f_name
+        from qualification_certificates q
+        left join organizations org on org.id = q.organization_id
+        left join specializations spec on spec.id = q.specialization_id
+        left join positions p on p.id = q.position_id
+        left join qualification_certificates_functions qf on qf.certificate_id = q.id
+        left join functions f on f.id = qf.function_id where q.id = #{id}
+    </select>
+
+    <insert id="addFunction" useGeneratedKeys="true" parameterType="map">
+        insert into qualification_certificates_functions (certificate_id, function_id)
+        values (#{certificate}, #{function})
+    </insert>
+
+    <delete id="deleteFunction">
+        delete from qualification_certificates_functions where certificate_id = #{certificate} and function_id = #{function}
+    </delete>
+</mapper>
