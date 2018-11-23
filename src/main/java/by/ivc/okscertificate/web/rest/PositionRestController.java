@@ -21,28 +21,28 @@ public class PositionRestController {
         this.positionService = positionService;
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
     public ResponseEntity create(@RequestBody Position position){
         return new ResponseEntity<>(positionService.save(position), HttpStatus.CREATED);
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE )
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id){
         positionService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(path = "name/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+    @GetMapping(path = "name/{name}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
     public List<Position> findByName(@PathVariable(name = "name") String name){
         return positionService.findByName(name);
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
     public Position findById(@PathVariable(name="id") Long id){
         return positionService.findById(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
     public List<Position> findAll(){
         return positionService.findAll();
     }

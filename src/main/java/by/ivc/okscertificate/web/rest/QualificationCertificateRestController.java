@@ -21,36 +21,36 @@ public class QualificationCertificateRestController {
         this.service = service;
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity create(@RequestBody QualificationCertificate certificate){
+    @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+    public ResponseEntity save(@RequestBody QualificationCertificate certificate){
         return new ResponseEntity<>(service.save(certificate), HttpStatus.CREATED);
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE )
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable(name = "id") Long id){
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
     public QualificationCertificate findById(@PathVariable(name="id") Long id){
 
         return service.findById(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
     public List<QualificationCertificate> findAll(){
         return service.findAll();
     }
 
-    @RequestMapping(path= "/function", method = RequestMethod.POST, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+    @PostMapping(path= "/function", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
     public ResponseEntity addFunction(@RequestParam(name="certificate") Long certificate,
                                       @RequestParam(name = "function") Long function){
         service.addFunction(certificate, function);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(path= "/function", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+    @DeleteMapping(path= "/function", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
     public ResponseEntity<Void> deleteFunction(@RequestParam(name="certificate") Long certificate,
                                                @RequestParam(name = "function") Long function){
         service.deleteFunction(certificate, function);

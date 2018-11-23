@@ -2,14 +2,14 @@ package by.ivc.okscertificate.data.entity;
 
 public class File {
     private Long id;
-    private String path;
+    private String name;
 
     public File() {
     }
 
-    public File(Long id, String path) {
+    public File(Long id, String name) {
         this.id = id;
-        this.path = path;
+        this.name = name;
     }
 
     public Long getId() {
@@ -20,11 +20,11 @@ public class File {
         this.id = id;
     }
 
-    public String getPath() {
-        return path;
+    public String getName() {
+        return name;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setName(String path) {
+        this.name = path;
     }
 }
