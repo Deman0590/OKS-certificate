@@ -1,6 +1,0 @@
-group = 'by.ivc'
-version = '0.0.1-SNAPSHOT'
-
-dependencies {
-    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.1'
-}
