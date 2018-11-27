@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class CertificateTypeServiceImpl implements CertificateTypeService {
 
+    private final CertificateTypeMapper typeMapper;
+
     @Autowired
-    private CertificateTypeMapper typeMapper;
+    public CertificateTypeServiceImpl(CertificateTypeMapper typeMapper) {
+        this.typeMapper = typeMapper;
+    }
 
     @Override
     public List<CertificateType> findAll() {

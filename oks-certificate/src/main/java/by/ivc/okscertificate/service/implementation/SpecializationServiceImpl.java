@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class SpecializationServiceImpl implements SpecializationService {
 
+    private final SpecializationMapper specializationMapper;
+
     @Autowired
-    private SpecializationMapper specializationMapper;
+    public SpecializationServiceImpl(SpecializationMapper specializationMapper) {
+        this.specializationMapper = specializationMapper;
+    }
 
     @Override
     public List<Specialization> findAll() {

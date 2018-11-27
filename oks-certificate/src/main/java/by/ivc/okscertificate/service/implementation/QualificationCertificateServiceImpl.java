@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class QualificationCertificateServiceImpl implements QualificationCertificateService {
 
+    private final QualificationCertificateMapper mapper;
+
     @Autowired
-    private QualificationCertificateMapper mapper;
+    public QualificationCertificateServiceImpl(QualificationCertificateMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Override
     public List<QualificationCertificate> findAll() {

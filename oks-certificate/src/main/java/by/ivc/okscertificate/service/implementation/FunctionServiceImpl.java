@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class FunctionServiceImpl implements FunctionService {
 
+    private final FunctionMapper functionMapper;
+
     @Autowired
-    private FunctionMapper functionMapper;
+    public FunctionServiceImpl(FunctionMapper functionMapper) {
+        this.functionMapper = functionMapper;
+    }
 
     @Override
     public List<Function> findAll() {

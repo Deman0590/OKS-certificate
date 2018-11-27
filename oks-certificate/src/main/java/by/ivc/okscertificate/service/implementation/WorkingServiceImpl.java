@@ -10,8 +10,12 @@ import java.util.List;
 @Service
 public class WorkingServiceImpl implements WorkingTypeService {
 
+    private final WorkingTypeMapper workingTypeMapper;
+
     @Autowired
-    private WorkingTypeMapper workingTypeMapper;
+    public WorkingServiceImpl(WorkingTypeMapper workingTypeMapper) {
+        this.workingTypeMapper = workingTypeMapper;
+    }
 
     @Override
     public List<WorkingType> findAll() {

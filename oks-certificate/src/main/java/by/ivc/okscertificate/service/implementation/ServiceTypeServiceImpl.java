@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class ServiceTypeServiceImpl implements ServiceTypeService {
 
+    private final ServiceTypeMapper serviceTypeMapper;
+
     @Autowired
-    private ServiceTypeMapper serviceTypeMapper;
+    public ServiceTypeServiceImpl(ServiceTypeMapper serviceTypeMapper) {
+        this.serviceTypeMapper = serviceTypeMapper;
+    }
 
     @Override
     public List<ServiceType> findAll() {

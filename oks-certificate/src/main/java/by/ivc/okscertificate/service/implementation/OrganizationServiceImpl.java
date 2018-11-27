@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
 
+    private final OrganizationMapper organizationMapper;
+
     @Autowired
-    private OrganizationMapper organizationMapper;
+    public OrganizationServiceImpl(OrganizationMapper organizationMapper) {
+        this.organizationMapper = organizationMapper;
+    }
 
     @Override
     public List<Organization> findAll() {
