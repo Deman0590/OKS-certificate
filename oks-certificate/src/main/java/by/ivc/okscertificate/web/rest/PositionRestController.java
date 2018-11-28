@@ -1,6 +1,6 @@
 package by.ivc.okscertificate.web.rest;
 
-import by.ivc.okscertificate.data.entity.Position;
+import by.ivc.okscertificate.dto.PositionDTO;
 import by.ivc.okscertificate.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +22,8 @@ public class PositionRestController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity create(@RequestBody Position position){
-        return new ResponseEntity<>(positionService.save(position), HttpStatus.CREATED);
+    public ResponseEntity create(@RequestBody PositionDTO positionDTO){
+        return new ResponseEntity<>(positionService.save(positionDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -33,17 +33,17 @@ public class PositionRestController {
     }
 
     @GetMapping(path = "name/{name}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<Position> findByName(@PathVariable(name = "name") String name){
+    public List<PositionDTO> findByName(@PathVariable(name = "name") String name){
         return positionService.findByName(name);
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public Position findById(@PathVariable(name="id") Long id){
+    public PositionDTO findById(@PathVariable(name="id") Long id){
         return positionService.findById(id);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<Position> findAll(){
+    public List<PositionDTO> findAll(){
         return positionService.findAll();
     }
 }

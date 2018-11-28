@@ -1,17 +1,18 @@
 package by.ivc.okscertificate.service;
 
 import by.ivc.okscertificate.data.entity.WorkingType;
+import by.ivc.okscertificate.dto.WorkingTypeDTO;
 
 import java.util.List;
 
 public interface WorkingTypeService {
-    List<WorkingType> findAll();
+    List<WorkingTypeDTO> findAll();
 
-    List<WorkingType> findByName(String name);
+    List<WorkingTypeDTO> findByName(String name);
 
-    WorkingType findById(long id);
+    WorkingTypeDTO findById(long id);
 
-    long save(WorkingType workingType);
+    long save(WorkingTypeDTO workingTypeDTO);
 
     void delete(Long id);
 }

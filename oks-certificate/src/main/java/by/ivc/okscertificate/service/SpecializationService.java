@@ -1,18 +1,19 @@
 package by.ivc.okscertificate.service;
 
 import by.ivc.okscertificate.data.entity.Specialization;
+import by.ivc.okscertificate.dto.SpecializationDTO;
 
 import java.util.List;
 
 public interface SpecializationService {
 
-    List<Specialization> findAll();
+    List<SpecializationDTO> findAll();
 
-    List<Specialization> findByName(String name);
+    List<SpecializationDTO> findByName(String name);
 
-    Specialization findById(long id);
+    SpecializationDTO findById(long id);
 
-    long save(Specialization specialization);
+    long save(SpecializationDTO specializationDTO);
 
     void delete(Long id);
 }

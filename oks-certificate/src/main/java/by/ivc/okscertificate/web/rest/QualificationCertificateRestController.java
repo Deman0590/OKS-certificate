@@ -1,6 +1,8 @@
 package by.ivc.okscertificate.web.rest;
 
 import by.ivc.okscertificate.data.entity.QualificationCertificate;
+import by.ivc.okscertificate.dto.QualificationCertificateDTO;
+import by.ivc.okscertificate.dto.mapper.BaseMapper;
 import by.ivc.okscertificate.service.QualificationCertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +24,8 @@ public class QualificationCertificateRestController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity save(@RequestBody QualificationCertificate certificate){
-        return new ResponseEntity<>(service.save(certificate), HttpStatus.CREATED);
+    public ResponseEntity save(@RequestBody QualificationCertificateDTO certificateDTO){
+        return new ResponseEntity<>(service.save(certificateDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -33,13 +35,13 @@ public class QualificationCertificateRestController {
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public QualificationCertificate findById(@PathVariable(name="id") Long id){
+    public QualificationCertificateDTO findById(@PathVariable(name="id") Long id){
 
         return service.findById(id);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<QualificationCertificate> findAll(){
+    public List<QualificationCertificateDTO> findAll(){
         return service.findAll();
     }
 

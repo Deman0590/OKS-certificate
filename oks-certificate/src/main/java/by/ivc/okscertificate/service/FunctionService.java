@@ -1,20 +1,21 @@
 package by.ivc.okscertificate.service;
 
 import by.ivc.okscertificate.data.entity.Function;
+import by.ivc.okscertificate.dto.FunctionDTO;
 
 import java.util.List;
 
 public interface FunctionService {
 
-    List<Function> findAll();
+    List<FunctionDTO> findAll();
 
-    List<Function> findByName(String name);
+    List<FunctionDTO> findByName(String name);
 
-    List<Function> findBySpecializationId(long id);
+    List<FunctionDTO> findBySpecializationId(long id);
 
-    Function findById(long id);
+    FunctionDTO findById(long id);
 
-    long save(Function function);
+    long save(FunctionDTO functionDTO);
 
     void delete(Long id);
 }

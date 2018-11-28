@@ -1,6 +1,6 @@
 package by.ivc.okscertificate.web.rest;
 
-import by.ivc.okscertificate.data.entity.Function;
+import by.ivc.okscertificate.dto.FunctionDTO;
 import by.ivc.okscertificate.service.FunctionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +22,8 @@ public class FunctionRestController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity create(@RequestBody Function function){
-        return new ResponseEntity<>(functionService.save(function), HttpStatus.CREATED);
+    public ResponseEntity create(@RequestBody FunctionDTO functionDTO){
+        return new ResponseEntity<>(functionService.save(functionDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -33,22 +33,22 @@ public class FunctionRestController {
     }
 
     @GetMapping(path = "name/{name}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<Function> findByName(@PathVariable(name = "name") String name){
+    public List<FunctionDTO> findByName(@PathVariable(name = "name") String name){
         return functionService.findByName(name);
     }
 
     @GetMapping(path = "specialization/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<Function> findByName(@PathVariable(name = "id") Long id){
+    public List<FunctionDTO> findByName(@PathVariable(name = "id") Long id){
         return functionService.findBySpecializationId(id);
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public Function findById(@PathVariable(name="id") Long id){
+    public FunctionDTO findById(@PathVariable(name="id") Long id){
         return functionService.findById(id);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<Function> findAll(){
+    public List<FunctionDTO> findAll(){
         return functionService.findAll();
     }
 }

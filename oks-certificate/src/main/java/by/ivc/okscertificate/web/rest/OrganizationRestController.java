@@ -1,6 +1,6 @@
 package by.ivc.okscertificate.web.rest;
 
-import by.ivc.okscertificate.data.entity.Organization;
+import by.ivc.okscertificate.dto.OrganizationDTO;
 import by.ivc.okscertificate.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,15 +15,14 @@ import java.util.List;
 public class OrganizationRestController {
 
     private final OrganizationService organizationService;
-
     @Autowired
     public OrganizationRestController(OrganizationService organizationService) {
         this.organizationService = organizationService;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity create(@RequestBody Organization organization){
-        return new ResponseEntity<>(organizationService.save(organization), HttpStatus.CREATED);
+    public ResponseEntity create(@RequestBody OrganizationDTO organizationDTO){
+        return new ResponseEntity<>(organizationService.save(organizationDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -33,17 +32,17 @@ public class OrganizationRestController {
     }
 
     @GetMapping(path = "name/{name}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<Organization> findByName(@PathVariable(name = "name") String name){
+    public List<OrganizationDTO> findByName(@PathVariable(name = "name") String name){
         return organizationService.findByName(name);
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public Organization findById(@PathVariable(name="id") Long id){
+    public OrganizationDTO findById(@PathVariable(name="id") Long id){
         return organizationService.findById(id);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<Organization> findAll(){
+    public List<OrganizationDTO> findAll(){
         return organizationService.findAll();
     }
 }

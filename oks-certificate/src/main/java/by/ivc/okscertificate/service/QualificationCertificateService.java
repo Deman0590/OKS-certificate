@@ -1,16 +1,17 @@
 package by.ivc.okscertificate.service;
 
 import by.ivc.okscertificate.data.entity.QualificationCertificate;
+import by.ivc.okscertificate.dto.QualificationCertificateDTO;
 
 import java.util.List;
 
 public interface QualificationCertificateService {
 
-    List<QualificationCertificate> findAll();
+    List<QualificationCertificateDTO> findAll();
 
-    QualificationCertificate findById(long id);
+    QualificationCertificateDTO findById(long id);
 
-    long save(QualificationCertificate qualificationCertificate);
+    long save(QualificationCertificateDTO qualificationCertificateDTO);
 
     void delete(Long id);
 

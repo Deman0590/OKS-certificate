@@ -1,6 +1,7 @@
 package by.ivc.okscertificate.web.rest;
 
 import by.ivc.okscertificate.data.entity.WorkingType;
+import by.ivc.okscertificate.dto.WorkingTypeDTO;
 import by.ivc.okscertificate.service.WorkingTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,8 @@ public class WorkingTypeRestController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity create(@RequestBody WorkingType workingType) {
-        return new ResponseEntity<>(workingTypeService.save(workingType), HttpStatus.CREATED);
+    public ResponseEntity create(@RequestBody WorkingTypeDTO workingTypeDTO) {
+        return new ResponseEntity<>(workingTypeService.save(workingTypeDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -33,17 +34,17 @@ public class WorkingTypeRestController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<WorkingType> findAll() {
+    public List<WorkingTypeDTO> findAll() {
         return workingTypeService.findAll();
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public WorkingType findById(@PathVariable(name = "id") Long id) {
+    public WorkingTypeDTO findById(@PathVariable(name = "id") Long id) {
         return workingTypeService.findById(id);
     }
 
     @GetMapping(path = "name/{name}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<WorkingType> findByName(@PathVariable(name = "name") String name) {
+    public List<WorkingTypeDTO> findByName(@PathVariable(name = "name") String name) {
         return workingTypeService.findByName(name);
     }
 }

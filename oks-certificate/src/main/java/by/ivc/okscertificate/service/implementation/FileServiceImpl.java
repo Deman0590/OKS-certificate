@@ -3,27 +3,28 @@ package by.ivc.okscertificate.service.implementation;
 import by.ivc.okscertificate.data.entity.File;
 import by.ivc.okscertificate.data.mapper.FileMapper;
 import by.ivc.okscertificate.service.FileService;
+import liquibase.util.file.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
 public class FileServiceImpl implements FileService {
 
-    /*
-     * NOT TESTING !!!
-     */
-
     private final FileMapper mapper;
-    private final Path fileRootPath = Paths.get("upload-certificate");
+    private final Path fileRootPath = Paths.get(".upload");
 
     @Autowired
     public FileServiceImpl(FileMapper mapper) {
@@ -49,9 +50,10 @@ public class FileServiceImpl implements FileService {
     @Override
     public long save(MultipartFile file) {
         try {
-            Files.copy(file.getInputStream(), this.fileRootPath.resolve(file.getOriginalFilename()));
+            String freFileName = freeFileName(file);
+            Files.copy(file.getInputStream(), this.fileRootPath.resolve(freFileName));
             File fileEntity = new File();
-            fileEntity.setName(file.getOriginalFilename());
+            fileEntity.setName(freFileName);
             mapper.create(fileEntity);
             return fileEntity.getId();
         } catch (IOException e) {
@@ -70,9 +72,21 @@ public class FileServiceImpl implements FileService {
         }
     }
 
-    public void init(){
-        /*
-        * TODO: check existing file root directory. create if needed
-        */
+    @PostConstruct
+    public void init() {
+        java.io.File baseDir = new java.io.File(fileRootPath.toString());
+        if (!baseDir.exists()) {
+            baseDir.mkdir();
+        }
+    }
+
+    private String freeFileName(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        Path filePath = fileRootPath.resolve(fileName);
+        if (Files.exists(filePath)) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss");
+            fileName = FilenameUtils.getBaseName(file.getOriginalFilename())+ "_" + dateFormat.format(new Date()) + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+        }
+        return fileName;
     }
 }

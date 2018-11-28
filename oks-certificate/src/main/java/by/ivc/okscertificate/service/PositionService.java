@@ -1,18 +1,19 @@
 package by.ivc.okscertificate.service;
 
 import by.ivc.okscertificate.data.entity.Position;
+import by.ivc.okscertificate.dto.PositionDTO;
 
 import java.util.List;
 
 public interface PositionService {
 
-    List<Position> findAll();
+    List<PositionDTO> findAll();
 
-    List<Position> findByName(String name);
+    List<PositionDTO> findByName(String name);
 
-    Position findById(long id);
+    PositionDTO findById(long id);
 
-    long save(Position position);
+    long save(PositionDTO positionDTO);
 
     void delete(Long id);
 }

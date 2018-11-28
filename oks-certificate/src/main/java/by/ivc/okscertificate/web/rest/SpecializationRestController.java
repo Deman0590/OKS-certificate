@@ -1,6 +1,7 @@
 package by.ivc.okscertificate.web.rest;
 
 import by.ivc.okscertificate.data.entity.Specialization;
+import by.ivc.okscertificate.dto.SpecializationDTO;
 import by.ivc.okscertificate.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,8 @@ public class SpecializationRestController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity create(@RequestBody Specialization certificateType){
-        return new ResponseEntity<>(specializationService.save(certificateType), HttpStatus.CREATED);
+    public ResponseEntity create(@RequestBody SpecializationDTO certificateTypeDto){
+        return new ResponseEntity<>(specializationService.save(certificateTypeDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -33,17 +34,17 @@ public class SpecializationRestController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<Specialization> findAll(){
+    public List<SpecializationDTO> findAll(){
         return specializationService.findAll();
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public Specialization findById(@PathVariable(name="id") Long id){
+    public SpecializationDTO findById(@PathVariable(name="id") Long id){
         return specializationService.findById(id);
     }
 
     @GetMapping(path = "name/{name}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<Specialization> findByName(@PathVariable(name = "name") String name){
+    public List<SpecializationDTO> findByName(@PathVariable(name = "name") String name){
         return specializationService.findByName(name);
     }
 }

@@ -1,6 +1,7 @@
 package by.ivc.okscertificate.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class QualificationCertificateDTO {
 
@@ -9,6 +10,7 @@ public class QualificationCertificateDTO {
     private String organizationName;
     private Long specializationId;
     private String specializationName;
+    private List<FunctionDTO> functions;
     private String worker;
     private Long positionId;
     private String positionName;
@@ -19,12 +21,13 @@ public class QualificationCertificateDTO {
     public QualificationCertificateDTO() {
     }
 
-    public QualificationCertificateDTO(Long id, Long organizationId, String organizationName, Long specializationId, String specializationName, String worker, Long positionId, String positionName, int number, Date startDate, Date stopDate) {
+    public QualificationCertificateDTO(Long id, Long organizationId, String organizationName, Long specializationId, String specializationName, List<FunctionDTO> functions, String worker, Long positionId, String positionName, int number, Date startDate, Date stopDate) {
         this.id = id;
         this.organizationId = organizationId;
         this.organizationName = organizationName;
         this.specializationId = specializationId;
         this.specializationName = specializationName;
+        this.functions = functions;
         this.worker = worker;
         this.positionId = positionId;
         this.positionName = positionName;
@@ -71,6 +74,14 @@ public class QualificationCertificateDTO {
 
     public void setSpecializationName(String specializationName) {
         this.specializationName = specializationName;
+    }
+
+    public List<FunctionDTO> getFunctions() {
+        return functions;
+    }
+
+    public void setFunctions(List<FunctionDTO> functions) {
+        this.functions = functions;
     }
 
     public String getWorker() {

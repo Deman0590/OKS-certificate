@@ -1,18 +1,19 @@
 package by.ivc.okscertificate.service;
 
 import by.ivc.okscertificate.data.entity.Organization;
+import by.ivc.okscertificate.dto.OrganizationDTO;
 
 import java.util.List;
 
 public interface OrganizationService {
 
-    List<Organization> findAll();
+    List<OrganizationDTO> findAll();
 
-    List<Organization> findByName(String name);
+    List<OrganizationDTO> findByName(String name);
 
-    Organization findById(long id);
+    OrganizationDTO findById(long id);
 
-    long save(Organization organization);
+    long save(OrganizationDTO organizationDTO);
 
     void delete(Long id);
 }

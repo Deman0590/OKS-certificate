@@ -20,7 +20,7 @@
     </delete>
 
     <select id="readById" resultMap="fileMap" parameterType="long">
-        select f.id as f_id, f.name as f_path from files f where p.id = #{id}
+        select f.id as f_id, f.name as f_name from files f where f.id = #{id}
     </select>
 
 </mapper>

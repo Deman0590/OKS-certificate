@@ -1,20 +1,21 @@
 package by.ivc.okscertificate.service;
 
 import by.ivc.okscertificate.data.entity.ServiceType;
+import by.ivc.okscertificate.dto.ServiceTypeDTO;
 
 import java.util.List;
 
 public interface ServiceTypeService {
 
-    List<ServiceType> findAll();
+    List<ServiceTypeDTO> findAll();
 
-    List<ServiceType> findByName(String name);
+    List<ServiceTypeDTO> findByName(String name);
 
-    List<ServiceType> findByWorkingTypeId(long id);
+    List<ServiceTypeDTO> findByWorkingTypeId(long id);
 
-    ServiceType findById(long id);
+    ServiceTypeDTO findById(long id);
 
-    long save(ServiceType serviceType);
+    long save(ServiceTypeDTO serviceTypeDTO);
 
     void delete(Long id);
 }

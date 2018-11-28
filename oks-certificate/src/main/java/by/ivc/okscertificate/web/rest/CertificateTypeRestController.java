@@ -1,7 +1,7 @@
 package by.ivc.okscertificate.web.rest;
 
 
-import by.ivc.okscertificate.data.entity.CertificateType;
+import by.ivc.okscertificate.dto.CertificateTypeDTO;
 import by.ivc.okscertificate.service.CertificateTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,8 +23,8 @@ public class CertificateTypeRestController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity create(@RequestBody CertificateType certificateType){
-        return new ResponseEntity<>(typeService.save(certificateType), HttpStatus.CREATED);
+    public ResponseEntity create(@RequestBody CertificateTypeDTO certificateTypeDTO){
+        return new ResponseEntity<>(typeService.save(certificateTypeDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -34,17 +34,17 @@ public class CertificateTypeRestController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<CertificateType> findAll(){
+    public List<CertificateTypeDTO> findAll(){
         return typeService.findAll();
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public CertificateType findById(@PathVariable(name="id") Long id){
+    public CertificateTypeDTO findById(@PathVariable(name="id") Long id){
         return typeService.findById(id);
     }
 
     @GetMapping(path = "name/{name}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<CertificateType> findByName(@PathVariable(name = "name") String name){
+    public List<CertificateTypeDTO> findByName(@PathVariable(name = "name") String name){
         return typeService.findByName(name);
     }
 }
