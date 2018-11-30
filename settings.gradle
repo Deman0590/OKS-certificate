@@ -1,1 +1,3 @@
 rootProject.name = 'okscertificate'
+include 'oks-certificate'
+
