@@ -1,0 +1,76 @@
+{
+  "title": "Qualification Certificate DTO schema",
+  "type": "object",
+  "required": [
+    "organizationId",
+    "specializationId",
+    "worker",
+    "positionId",
+    "number",
+    "startDate",
+    "stopDate"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "organizationId": {
+      "type": "integer"
+    },
+    "organizationName": {
+      "type": "string"
+    },
+    "specializationId": {
+      "type": "integer"
+    },
+    "specializationName": {
+      "type": "string"
+    },
+    "functions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "specializationId": {
+            "type": ["integer", "null"],
+            "default": null
+          },
+          "specializationName": {
+            "type":  ["string", "null"],
+            "default": null
+          }
+        }
+      }
+    },
+    "worker": {
+      "type": "string"
+    },
+    "positionId": {
+      "type": "integer"
+    },
+    "positionName": {
+      "type": "string"
+    },
+    "number": {
+      "type": "integer"
+    },
+    "startDate": {
+      "type": "string",
+      "pattern": "^(.*)$"
+    },
+    "stopDate": {
+      "type": "string",
+      "pattern": "^(.*)$"
+    }
+  }
+}

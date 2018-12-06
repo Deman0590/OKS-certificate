@@ -1,0 +1,16 @@
+{
+  "title" : "Specialization DTO schema",
+  "type" : "object",
+  "required" : [
+    "name"
+  ],
+  "additionalProperties": false,
+  "properties" : {
+    "id" : {
+      "type" : "number"
+    },
+    "name" : {
+      "type" : "string"
+    }
+  }
+}

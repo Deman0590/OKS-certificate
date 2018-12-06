@@ -1,8 +1,13 @@
 package by.ivc.okscertificate.web.rest;
 
 
+import by.ivc.jsonvalidator.SchemaType;
+import by.ivc.jsonvalidator.exception.JsonConvertException;
+import by.ivc.jsonvalidator.exception.JsonValidationException;
+import by.ivc.jsonvalidator.utils.JsonStringToObjectConverter;
 import by.ivc.okscertificate.dto.CertificateTypeDTO;
 import by.ivc.okscertificate.service.CertificateTypeService;
+import by.ivc.okscertificate.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,14 +21,18 @@ import java.util.List;
 public class CertificateTypeRestController {
 
     private final CertificateTypeService typeService;
+    private final ValidationService validationService;
 
     @Autowired
-    public CertificateTypeRestController(CertificateTypeService typeService) {
+    public CertificateTypeRestController(CertificateTypeService typeService, ValidationService validationService) {
         this.typeService = typeService;
+        this.validationService = validationService;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity create(@RequestBody CertificateTypeDTO certificateTypeDTO){
+    public ResponseEntity create(@RequestBody String certificateTypeDTOString) throws JsonValidationException, JsonConvertException {
+        validationService.validateJson(certificateTypeDTOString, SchemaType.CertificateType);
+        CertificateTypeDTO certificateTypeDTO = JsonStringToObjectConverter.convert(certificateTypeDTOString, CertificateTypeDTO.class);
         return new ResponseEntity<>(typeService.save(certificateTypeDTO), HttpStatus.CREATED);
     }
 

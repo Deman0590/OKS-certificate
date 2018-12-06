@@ -1,0 +1,23 @@
+{
+  "title" : "Function DTO schema",
+  "type" : "object",
+  "required" : [
+    "name",
+    "specializationId"
+  ],
+  "additionalProperties": false,
+  "properties" : {
+    "id" : {
+      "type" : "number"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "specializationId" : {
+      "type" : "number"
+    },
+    "specializationName" : {
+      "type" : "string"
+    }
+  }
+}

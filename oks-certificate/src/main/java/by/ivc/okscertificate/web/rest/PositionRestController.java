@@ -1,7 +1,12 @@
 package by.ivc.okscertificate.web.rest;
 
+import by.ivc.jsonvalidator.SchemaType;
+import by.ivc.jsonvalidator.exception.JsonConvertException;
+import by.ivc.jsonvalidator.exception.JsonValidationException;
+import by.ivc.jsonvalidator.utils.JsonStringToObjectConverter;
 import by.ivc.okscertificate.dto.PositionDTO;
 import by.ivc.okscertificate.service.PositionService;
+import by.ivc.okscertificate.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,14 +20,18 @@ import java.util.List;
 public class PositionRestController {
 
     private final PositionService positionService;
+    private final ValidationService validationService;
 
     @Autowired
-    public PositionRestController(PositionService positionService) {
+    public PositionRestController(PositionService positionService, ValidationService validationService) {
         this.positionService = positionService;
+        this.validationService = validationService;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public ResponseEntity create(@RequestBody PositionDTO positionDTO){
+    public ResponseEntity create(@RequestBody String positionDTOString) throws JsonValidationException, JsonConvertException {
+        validationService.validateJson(positionDTOString, SchemaType.Position);
+        PositionDTO positionDTO = JsonStringToObjectConverter.convert(positionDTOString, PositionDTO.class);
         return new ResponseEntity<>(positionService.save(positionDTO), HttpStatus.CREATED);
     }
 

@@ -1,0 +1,16 @@
+{
+  "title" : "Certificate Type DTO schema",
+  "type" : "object",
+  "required" : [
+    "name"
+  ],
+  "additionalProperties": false,
+  "properties" : {
+    "id" : {
+      "type" : "number"
+    },
+    "name" : {
+      "type" : "string"
+    }
+  }
+}

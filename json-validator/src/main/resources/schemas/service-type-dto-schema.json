@@ -1,0 +1,23 @@
+{
+  "title" : "Service Type DTO schema",
+  "type" : "object",
+  "required" : [
+    "name",
+    "workingTypeId"
+  ],
+  "additionalProperties": false,
+  "properties" : {
+    "id" : {
+      "type" : "number"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "workingTypeId" : {
+      "type" : "number"
+    },
+    "workingTypeName" : {
+      "type" : "string"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 package by.ivc.okscertificate.service.implementation;
 
+import by.ivc.okscertificate.data.entity.Function;
 import by.ivc.okscertificate.data.entity.QualificationCertificate;
 import by.ivc.okscertificate.data.mapper.QualificationCertificateMapper;
 import by.ivc.okscertificate.dto.QualificationCertificateDTO;
@@ -38,6 +39,9 @@ public class QualificationCertificateServiceImpl implements QualificationCertifi
         QualificationCertificate qualificationCertificate = baseMapper.map(qualificationCertificateDTO, QualificationCertificate.class);
         if (null == qualificationCertificate.getId()){
             mapper.create(qualificationCertificate);
+            for (Function function: qualificationCertificate.getFunctions()) {
+                mapper.addFunction(qualificationCertificate.getId(), function.getId());
+            }
         } else {
             mapper.update(qualificationCertificate);
         }

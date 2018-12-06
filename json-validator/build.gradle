@@ -1,0 +1,6 @@
+group 'by.ivc'
+version '0.0.1-SNAPSHOT'
+
+dependencies {
+    compile group: 'com.github.java-json-tools', name: 'json-schema-validator', version: '2.2.10'
+}
