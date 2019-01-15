@@ -1,6 +1,5 @@
 package by.ivc.okscertificate.service;
 
-import by.ivc.okscertificate.data.entity.QualificationCertificate;
 import by.ivc.okscertificate.dto.QualificationCertificateDTO;
 
 import java.util.List;

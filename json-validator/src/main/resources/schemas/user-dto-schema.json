@@ -1,0 +1,39 @@
+{
+  "title" : "Organization DTO schema",
+  "type" : "object",
+  "required" : [
+    "name"
+  ],
+  "additionalProperties": false,
+  "properties" : {
+    "id" : {
+      "type" : "number"
+    },
+    "login" : {
+      "type" : "string"
+    },
+    "password" : {
+      "type" : "string"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

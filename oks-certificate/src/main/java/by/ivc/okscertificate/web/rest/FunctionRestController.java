@@ -47,7 +47,7 @@ public class FunctionRestController {
     }
 
     @GetMapping(path = "specialization/{id}", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
-    public List<FunctionDTO> findByName(@PathVariable(name = "id") Long id){
+    public List<FunctionDTO> findBySpecializationId(@PathVariable(name = "id") Long id){
         return functionService.findBySpecializationId(id);
     }
 

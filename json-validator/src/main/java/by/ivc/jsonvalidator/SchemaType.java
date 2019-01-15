@@ -8,7 +8,8 @@ public enum SchemaType {
     QualificationCertificate("/qualification-certificate-dto-schema.json"),
     ServiceType("/service-type-dto-schema.json"),
     Specialization("/specialization-dto-schema.json"),
-    WorkingType("/working-type-dto-schema.json");
+    WorkingType("/working-type-dto-schema.json"),
+    User("/user-dto-schema.json");
 
     private String schema;
 

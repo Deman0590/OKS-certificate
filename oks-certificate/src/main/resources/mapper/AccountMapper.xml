@@ -1,0 +1,59 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="by.ivc.okscertificate.data.mapper.AccountMapper">
+
+    <resultMap id="userMap" type="Account">
+        <id property="id" column="id"/>
+        <result property="login" column="login"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <collection property="roles" ofType="Role" javaType="list"
+                    resultMap="roleMap"/>
+    </resultMap>
+
+    <resultMap id="roleMap" type="Role">
+        <result property="value" column="role"/>
+    </resultMap>
+
+    <insert id="create" parameterType="Organization" useGeneratedKeys="true">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            select nextVal('users_id_seq')
+        </selectKey>
+        insert into users (id, name) values (#{id}, #{name})
+    </insert>
+
+    <update id="update" parameterType="Organization">
+        update users set "name" = #{name} where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from users where id = #{id}
+    </delete>
+
+    <select id="readAll" resultMap="userMap">
+        select u.id as id, u.login as login, u.name as name, ur.role as role from users u
+        left join users_roles ur on ur.user_id = u.id
+    </select>
+
+    <select id="readById" resultMap="userMap" parameterType="long">
+        select u.id as id, u.login as login, u.name as name, ur.role as role from users u
+        left join users_roles ur on ur.user_id = u.id
+        where u.id = #{id}
+    </select>
+
+    <select id="readByName" resultMap="userMap" parameterType="string">
+        select u.id as id, u.login as login, u.password as password, u.name as name, ur.role as role from users u
+        left join users_roles ur on ur.user_id = u.id
+        where u.login = #{name}
+    </select>
+
+    <insert id="addRole" useGeneratedKeys="true" parameterType="map">
+        insert into users_roles (user_id, role_id)
+        values (#{user}, #{role})
+    </insert>
+
+    <delete id="removeRole">
+        delete from users_roles where user_id = #{user} and role_id = #{role}
+    </delete>
+</mapper>

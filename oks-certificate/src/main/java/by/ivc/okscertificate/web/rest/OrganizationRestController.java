@@ -4,6 +4,7 @@ import by.ivc.jsonvalidator.SchemaType;
 import by.ivc.jsonvalidator.exception.JsonConvertException;
 import by.ivc.jsonvalidator.exception.JsonValidationException;
 import by.ivc.jsonvalidator.utils.JsonStringToObjectConverter;
+import by.ivc.okscertificate.data.entity.Role;
 import by.ivc.okscertificate.dto.OrganizationDTO;
 import by.ivc.okscertificate.service.OrganizationService;
 import by.ivc.okscertificate.service.ValidationService;
@@ -11,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static by.ivc.okscertificate.data.entity.Role.*;
 
 @RestController
 @RequestMapping(value = "organization")
