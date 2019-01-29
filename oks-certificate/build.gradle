@@ -21,8 +21,14 @@ configurations {
     providedRuntime
 }
 
+configurations.all {
+    exclude module: "spring-boot-starter-logging"
+    exclude module: "logback-classic"
+}
+
 dependencies {
-    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-web') 
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.1.2.RELEASE'
     implementation('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2')
     runtimeOnly('org.postgresql:postgresql')
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'

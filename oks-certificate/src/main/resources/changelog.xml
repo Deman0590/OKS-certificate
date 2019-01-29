@@ -6,6 +6,27 @@
 
     <changeSet id="1.1.0" author="Dmitry Danilov">
 
+        <createTable tableName="logs">
+            <column name="EVENT_ID" type="bigint">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="logs_pk"/>
+            </column>
+            <column name="EVENT_DATE" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LEVEL" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LOGGER" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MESSAGE" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="THROWABLE" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
         <createTable tableName="certificate_types">
             <column name="id" autoIncrement="true" type="bigint">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="certificate_types_pk"/>

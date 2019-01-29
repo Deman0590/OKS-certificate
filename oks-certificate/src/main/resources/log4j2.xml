@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+        <Property name="APP_LOG_ROOT">c:/logs</Property>
+        <Property name="LOG_TABLE">logs</Property>
+    </Properties>
+
+    <Appenders>
+
+        <!--<appender name="DB" class="org.apache.log4j.jdbc.JDBCAppender">-->
+            <!--<param name="url" value="jdbc:postgresql://srvweb.vtb.rw:5432/oks-dev"/>-->
+            <!--<param name="driver" value="org.postgresql.Driver"/>-->
+            <!--<param name="user" value="postgres"/>-->
+            <!--<param name="password" value="vtb_postgre"/>-->
+            <!--<param name="sql" value="INSERT INTO ${LOG_TABLE} VALUES('%x','%d','%C','%p','%m')"/>-->
+
+            <!--<layout class="org.apache.log4j.PatternLayout">-->
+            <!--</layout>-->
+        <!--</appender>-->
+
+        <!--<JDBC name="databaseAppender" tableName="LOGGING.APPLICATION_LOG">-->
+            <!--<ConnectionFactory class="by.ivc.okscertificate.ConnectionFactory" method="getDatabaseConnection" />-->
+            <!--<Column name="EVENT_ID" literal="LOGGING.APPLICATION_LOG_SEQUENCE.NEXTVAL" />-->
+            <!--<Column name="EVENT_DATE" isEventTimestamp="true" />-->
+            <!--<Column name="LEVEL" pattern="%level" />-->
+            <!--<Column name="LOGGER" pattern="%logger" />-->
+            <!--<Column name="MESSAGE" pattern="%message" />-->
+            <!--<Column name="THROWABLE" pattern="%ex{full}" />-->
+        <!--</JDBC>-->
+
+        <RollingFile name="File" fileName="${APP_LOG_ROOT}/error.log"
+                     filePattern="${APP_LOG_ROOT}/error-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <!--<TimeBasedTriggeringPolicy interval="1" modulate="true"/>-->
+                <SizeBasedTriggeringPolicy size="10000KB"/>
+            </Policies>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="by.ivc.okscertificate" level="error" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger>
+        <Logger name="by.ivc" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Root level="warn">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

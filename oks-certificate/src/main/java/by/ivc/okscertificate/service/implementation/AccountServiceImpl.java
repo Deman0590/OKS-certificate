@@ -6,6 +6,8 @@ import by.ivc.okscertificate.data.mapper.AccountMapper;
 import by.ivc.okscertificate.dto.AccountDTO;
 import by.ivc.okscertificate.dto.mapper.BaseMapper;
 import by.ivc.okscertificate.service.AccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,7 @@ public class AccountServiceImpl implements AccountService {
 
     private final BaseMapper baseMapper;
     private final AccountMapper accountMapper;
+    private final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     @Autowired
     public AccountServiceImpl(BaseMapper baseMapper, AccountMapper accountMapper) {
@@ -33,6 +35,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountDTO> findAll() {
+        logger.error("get all users");
         return baseMapper.mapAll(accountMapper.readAll(), AccountDTO.class);
     }
 
@@ -79,15 +82,6 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = accountMapper.readByName(username);
-//        Account account = new Account();
-//        account.setName("ivc");
-//        account.setLogin("ivc");
-//        //account.setPassword("oks");
-//        account.setPassword("$2a$10$/wcaYsgu2fnv9YG2SlnZCeyjrb9FDIhhS9n3EHkXixmxpzPr/haIu");
-//        List<Role> roles = new ArrayList<>();
-//        roles.add(Role.SUPER_ADMIN);
-//        roles.add(Role.ADMIN);
-//        account.setRoles(roles);
         if (null == account) {
             throw new UsernameNotFoundException("Username not found");
         }
